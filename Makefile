@@ -26,14 +26,13 @@ LD := ${ld.${TOOLSET}}
 AR := ${ar.${TOOLSET}}
 
 cxxflags.gcc.debug := -Og -fstack-protector-all -fno-omit-frame-pointer # -D_GLIBCXX_DEBUG
-cxxflags.gcc.release := -O3 -mtune=native -ffast-math -falign-{functions,loops}=64 -DNDEBUG
-cxxflags.gcc := -pthread -march=native -std=gnu++17 -W{all,extra,error,no-{maybe-uninitialized,unused-function,unused-local-typedefs}} -g -fmessage-length=0 ${cxxflags.gcc.${BUILD}}
-
+cxxflags.gcc.release := -O3 -mtune=native -ffast-math -DNDEBUG
+cxxflags.gcc := -pthread -march=native -std=gnu++17 -W{all,extra,error} -g -fmessage-length=0 ${cxxflags.gcc.${BUILD}}
 cflags.gcc := -pthread -march=native -W{all,extra} -g -fmessage-length=0 ${cxxflags.gcc.${BUILD}}
 
 cxxflags.clang.debug := -O0 -fstack-protector-all
-cxxflags.clang.release := -O3 -mtune=native -ffast-math -falign-functions=64 -DNDEBUG
-cxxflags.clang := -stdlib=libstdc++ -pthread -march=native -std=gnu++17 -W{all,extra,error,no-{unused-variable,unused-function,unused-local-typedefs}} -g -fmessage-length=0 ${cxxflags.clang.${BUILD}}
+cxxflags.clang.release := -O3 -mtune=native -ffast-math -DNDEBUG
+cxxflags.clang := -stdlib=libstdc++ -pthread -march=native -std=gnu++17 -W{all,extra,error} -g -fmessage-length=0 ${cxxflags.clang.${BUILD}}
 ldflags.clang := -stdlib=libstdc++ ${ldflags.clang.${BUILD}}
 
 # Additional CPPFLAGS, CXXFLAGS, CFLAGS, LDLIBS, LDFLAGS can come from the command line, e.g. make CPPFLAGS='-I<my-include-dir>', or from environment variables.
@@ -41,7 +40,7 @@ ldflags.clang := -stdlib=libstdc++ ${ldflags.clang.${BUILD}}
 cxxflags := ${cxxflags.${TOOLSET}} ${CXXFLAGS}
 cflags := ${cflags.${TOOLSET}} ${CFLAGS}
 cppflags := ${CPPFLAGS} -Iinclude
-ldflags := -fuse-ld=gold -pthread -g ${ldflags.${TOOLSET}} ${LDFLAGS}
+ldflags := -pthread -g ${ldflags.${TOOLSET}} ${LDFLAGS}
 ldlibs := -lrt ${LDLIBS}
 
 ifdef BOOST_ROOT_1_72_0 # E.g./opt/hostedtoolcache/boost/1.72.0/x64
@@ -59,7 +58,7 @@ LINK.EXE = ${LD} -o $@ $(ldflags) $(filter-out Makefile,$^) $(ldlibs)
 LINK.SO = ${LD} -o $@ -shared $(ldflags) $(filter-out Makefile,$^) $(ldlibs)
 LINK.A = ${AR} rscT $@ $(filter-out Makefile,$^)
 
-exes := test
+exes := test example
 
 all : ${exes}
 
