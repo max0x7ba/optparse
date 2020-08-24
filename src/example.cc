@@ -1,12 +1,7 @@
-[![C/C++ CI](https://github.com/max0x7ba/optparse/workflows/C/C++%20CI/badge.svg)](https://github.com/max0x7ba/optparse/actions?query=workflow%3A%22C%2FC%2B%2B+CI%22)
+/* -*- mode: c++; c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4 -*- */
 
-# optparse
-C++17 command line parsing inspired by Python optparse library. It uses GNU `getopt_long` for actuall command line parsing.
+// Copyright (c) 2020 Maxim Egorushkin. MIT License. See the full licence in file LICENSE.
 
-# Usage example
-
-## Code
-```
 #include <optparse/optparse.h>
 #include <iostream>
 
@@ -41,26 +36,3 @@ int main(int ac, char** av) {
         std::cout << '\n';
     }
 }
-```
-
-## Build
-```
-make -rC optparse -j8
-```
-
-## Run
-
-```
-$ ./optparse/build/release/gcc/example -b --int 1 --double 3.14 --string abc --vector 3,2,1 -h hello optparse
-  -h, --help          : Display this help.
-  -b, --bool=BOOL     : bool option, value is 1.
-  -i, --int=INT       : int option, value is 1.
-  -d, --double=DOUBLE : double option, value is 3.14.
-  -s, --string=STRING : string option, value is abc.
-  -v, --vector=LIST   : a vector option, value is 1.
-hello optparse
-```
-
----
-
-Copyright (c) 2020 Maxim Egorushkin. MIT License. See the full licence in file LICENSE.
