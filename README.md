@@ -45,7 +45,8 @@ int main(int ac, char** av) {
 
 ## Build
 ```
-make -rC optparse -j8
+$ git clone https://github.com/max0x7ba/optparse.git
+$ make -rC optparse -j8
 ```
 
 ## Run
